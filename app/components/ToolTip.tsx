@@ -1,7 +1,5 @@
 import { twMerge } from "tailwind-merge"
 
-import { MouseEventHandler } from "react";
-
 interface ToolTipProps {
   className?: string;
   tips: string[]; 

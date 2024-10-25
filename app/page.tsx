@@ -1,7 +1,6 @@
 "use client";
 
 import Main from "./components/Main";
-import RegisterUser from "./components/RegisterUser";
 import Loader from "./components/Loader";
 
 // Library Imports

@@ -4,6 +4,11 @@ import { signIn, signOut } from "@/utils/databasefunctions";
 import { useData } from "@/providers/DataProvider";
 
 import RegisterUser from "./RegisterUser";
+import ToolTip from "./ToolTip";
+
+import { twMerge } from "tailwind-merge";
+
+import { IoEnter, IoExit } from "react-icons/io5";
 
 import { links } from "@/data";
 
@@ -12,8 +17,15 @@ interface MainProps {
     isUserRegistered: boolean;
 }
 
+const buttonBase = `
+w-[40px] h-[40px] 
+flex justify-center items-center 
+rounded-full
+group relative`;
+const buttonIcon = `bg-header text-white p-1`;
+
 const Main: React.FC<MainProps> = ({ isUserLinked, isUserRegistered }) => {
-  const { user } = useData();
+  const { user, users } = useData();
 
   if (isUserLinked && !isUserRegistered) {
     <RegisterUser />
@@ -30,54 +42,77 @@ const Main: React.FC<MainProps> = ({ isUserLinked, isUserRegistered }) => {
         flex flex-col gap-y-4
         ">
             <div className="
-            w-full h-[50px]
-            flex justify-end 
-            mb-12">
+            w-full
+            flex justify-end gap-x-4
+            mb-16">
                 {
                     (!isUserLinked && !isUserRegistered) && (
                         <button 
                         onClick={signIn}
-                        className="
-                        bg-header text-white font-semibold
-                        rounded-lg
-                        px-3 py-1">
-                            Register & Log In
+                        className={twMerge(buttonBase, buttonIcon)}
+                        >
+                            <ToolTip className="hidden group-hover:inline-block" 
+                            tips={["Join Waitlist"]} />
+                            <IoEnter size={22.5} />
                         </button>
                     )
                 }
                 {
                     (isUserLinked && isUserRegistered) && (
-                        <button
-                        onClick={signOut}
-                        className="w-[50px] h-full">
-                            <img 
-                            className="w-full h-full"
-                            src={user?.photoURL} />
-                        </button>
+                        <>
+                            <button 
+                            onClick={signOut}
+                            className={twMerge(buttonBase, buttonIcon)}
+                            >
+                                <ToolTip className="hidden group-hover:inline-block" 
+                                tips={["Sign Out"]} />
+                                <IoExit size={22.5} />
+                            </button>
+                            <button 
+                            onClick={() => {
+                                // Go To Settings!
+                            }}
+                            className={twMerge(buttonBase)}
+                            >
+                                <ToolTip className="hidden group-hover:inline-block" 
+                                tips={["Edit Profile"]} />
+                                <img src={user?.photoURL}
+                                className="w-full h-full rounded-full" />
+                            </button>
+                        </>
                     )
                 }
             </div>
             <div className="
-            flex items-center gap-x-6
-            mb-6">
+            flex gap-x-6
+            mb-6
+            max-[650px]:flex-col max-[650px]:gap-y-5">
                 <img 
                 src="favicon.ico"
-                className="w-[50px] bg-secondary p-1 rounded-full" />
-                <h3 className="dynamic-subheading font-title text-header font-semibold">
-                    The Chat App for Students, Me2
-                </h3>
+                className="w-[50px] h-[50px]" />
+                <div className="">
+                    <h3 className="dynamic-subheading font-title text-header font-semibold">
+                        The Chat App for Students, Me2
+                    </h3>
+                    <p
+                    className="
+                    dynamic-text text-black/70">
+                        {users?.length}/1000 users until release!
+                    </p>
+                </div>
             </div>
             {links.map((link, index) => (
                 <a 
                 key={index}
                 href={link.link}
-                className="
+                className={`
                 w-full
                 px-6 py-4
                 flex gap-x-6 items-center
                 rounded-full
-                border-2 border-black
-                ">
+                border-[1px] border-black
+                ${link.locked && 'opacity-50'}
+                `}>
                     <div className="dynamic-text">
                         {link.icon}
                     </div>

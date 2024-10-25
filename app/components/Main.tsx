@@ -39,8 +39,7 @@ const Main: React.FC<MainProps> = ({ isUserLinked, isUserRegistered }) => {
   return (
     <section className="
     w-[100vw] h-[100vh] 
-    flex justify-center items-center
-    bg-offwhite">
+    flex justify-center items-center">
         <div className="
         max-w-[1000px] w-full
         px-4 py-8

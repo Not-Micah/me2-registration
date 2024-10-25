@@ -50,43 +50,49 @@ const Main: React.FC<MainProps> = ({ isUserLinked, isUserRegistered }) => {
             w-full
             flex justify-end gap-x-4
             mb-16">
-                {
-                    (!isUserLinked && !isUserRegistered) && (
-                        <button 
-                        onClick={signIn}
-                        className={twMerge(buttonBase, buttonIcon)}
-                        >
-                            <ToolTip className="hidden group-hover:inline-block" 
-                            tips={["Join Waitlist"]} />
-                            <IoEnter size={22.5} />
-                        </button>
-                    )
-                }
-                {
-                    (isUserLinked && isUserRegistered) && (
-                        <>
+                <div className="
+                flex gap-x-2 
+                bg-black/50 
+                p-1 rounded-full">
+                    {
+                        (!isUserLinked && !isUserRegistered) && (
                             <button 
-                            onClick={signOut}
+                            onClick={signIn}
                             className={twMerge(buttonBase, buttonIcon)}
                             >
                                 <ToolTip className="hidden group-hover:inline-block" 
-                                tips={["Sign Out"]} />
-                                <IoExit size={22.5} />
+                                tips={["Join Waitlist"]} />
+                                <IoEnter size={22.5} />
                             </button>
-                            <button 
-                            onClick={() => {
-                                router.replace("./settings")
-                            }}
-                            className={twMerge(buttonBase)}
-                            >
-                                <ToolTip className="hidden group-hover:inline-block" 
-                                tips={["Edit Profile"]} />
-                                <img src={user?.photoURL}
-                                className="w-full h-full rounded-full" />
-                            </button>
-                        </>
-                    )
-                }
+                        )
+                    }
+                    {
+                        (isUserLinked && isUserRegistered) && (
+                            <>
+                                <button 
+                                onClick={signOut}
+                                className={twMerge(buttonBase, buttonIcon)}
+                                >
+                                    <ToolTip className="hidden group-hover:inline-block" 
+                                    tips={["Sign Out"]} />
+                                    <IoExit size={22.5} />
+                                </button>
+                                <button 
+                                onClick={() => {
+                                    router.replace("./settings")
+                                }}
+                                className={twMerge(buttonBase)}
+                                >
+                                    <ToolTip className="hidden group-hover:inline-block" 
+                                    tips={["Edit Profile"]} />
+                                    <img src={user?.photoURL}
+                                    className="w-full h-full rounded-full" />
+                                </button>
+                            </>
+
+                        )
+                    }
+                </div>
             </div>
             <div className="
             flex gap-x-6
@@ -116,6 +122,10 @@ const Main: React.FC<MainProps> = ({ isUserLinked, isUserRegistered }) => {
                 flex gap-x-6 items-center
                 rounded-full
                 border-[1px] border-black
+
+                hover:bg-secondary
+                transition-all duration-150
+
                 ${link.locked && 'opacity-50'}
                 `}>
                     <div className="dynamic-text">

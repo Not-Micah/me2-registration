@@ -10,7 +10,7 @@ interface ToolTipProps {
 const ToolTip: React.FC<ToolTipProps> = ({ className, tips }) => {
   return (
     <div className={twMerge(`
-    absolute left-1/2 transform -translate-x-1/2 -top-[100%]
+    absolute left-1/2 transform -translate-x-[100px] -top-[100%]
     flex flex-col items-start
     py-1 px-2
     bg-black/80 text-white rounded-lg

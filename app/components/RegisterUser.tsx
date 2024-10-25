@@ -65,7 +65,7 @@ const RegisterUser = () => {
     <section
     className="
     w-[100vw] h-[100vh] 
-    flex justify-center items-center">
+    flex justify-center items-start">
       <form 
       onSubmit={handleSubmit}
       className="
@@ -168,7 +168,7 @@ const RegisterUser = () => {
         />
 
         <div className="
-        w-full flex mb-6">
+        w-full flex">
           <button
           type="submit"
           disabled={clicked}

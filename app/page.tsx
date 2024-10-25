@@ -37,12 +37,7 @@ const Home = () => {
   }
   
   return (
-    <main
-    className="
-    bg-offwhite py-16
-    overflow-y-scroll no-scrollbar">
       <Main isUserLinked={isUserLinked} isUserRegistered={isUserRegistered} />
-    </main>
   );
 };
 

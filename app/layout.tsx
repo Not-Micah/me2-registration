@@ -31,7 +31,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <DataContextProvider>
-          {children}  
+          <div className="
+          bg-offwhite 
+          py-12
+          overflow-y-scroll no-scrollbar">
+            {children}  
+          </div>
         </DataContextProvider>
       </body>
     </html>

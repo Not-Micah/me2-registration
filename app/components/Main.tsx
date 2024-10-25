@@ -5,12 +5,12 @@ import { useData } from "@/providers/DataProvider";
 
 import RegisterUser from "./RegisterUser";
 import ToolTip from "./ToolTip";
+import { links } from "@/data";
 
 import { twMerge } from "tailwind-merge";
-
 import { IoEnter, IoExit } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
-import { links } from "@/data";
 
 interface MainProps {
     isUserLinked: boolean;
@@ -26,9 +26,14 @@ const buttonIcon = `bg-header text-white p-1`;
 
 const Main: React.FC<MainProps> = ({ isUserLinked, isUserRegistered }) => {
   const { user, users } = useData();
+  const router = useRouter();
+
+    console.log(isUserLinked, isUserRegistered)
 
   if (isUserLinked && !isUserRegistered) {
-    <RegisterUser />
+    return (
+        <RegisterUser />    
+    )
   }
 
   return (
@@ -70,7 +75,7 @@ const Main: React.FC<MainProps> = ({ isUserLinked, isUserRegistered }) => {
                             </button>
                             <button 
                             onClick={() => {
-                                // Go To Settings!
+                                router.replace("./settings")
                             }}
                             className={twMerge(buttonBase)}
                             >
